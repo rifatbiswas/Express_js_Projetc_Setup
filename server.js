@@ -18,12 +18,12 @@ app.use(cors());
 //==== MongoDB Connection =====
 
 mongoose
-    .connect(process.env.DATABASE);
-    .then( () => console.log("DB Connectted"));
+    .connect(process.env.DATABASE)
+    .then( () => console.log("DB Connectted"))
     .catch( (err) =>console.log("DB Error",err));
 
 
-const port = process,env.PORT || 8000;
+const port = process.env.PORT || 8000
 
 app.listen(port,()=>{
     console.log("App is running on port ${port}");
