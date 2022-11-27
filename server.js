@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 require("dotenv").config();
 const morgan = require('morgan');
 const cors = require('cors');
-const {readdiSynce} = require('fs');
+const {readdiSynce, readdirSync} = require('fs');
 
 // ========= Midileware =========
 app.use(helmet());
@@ -22,8 +22,12 @@ mongoose
     .then( () => console.log("DB Connectted"))
     .catch( (err) =>console.log("DB Error",err));
 
+// ========= routes middleware ========
 
-const port = process.env.PORT || 8000
+    readdirSync("./routes").map(r => app.use("/api/v1",require(`./routes/${r}`)))
+
+
+const port = process.env.PORT || 8000;
 
 app.listen(port,()=>{
     console.log("App is running on port ${port}");
